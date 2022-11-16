@@ -24,14 +24,6 @@ def send_mail(mail_context: MailContext, config: MailConfig):
     # """
     mail_content = mail_context.content
 
-    # The mail addresses and password
-    sender_address = "mingfan789@gmail.com"
-
-    # Remember to use application password
-    # Not your own password
-    sender_pass = "dheacdzydehpgnzs"
-    receiver_address = "mingfan789@gmail.com"
-
     # Setup the MIME
     message = MIMEMultipart()
     message["From"] = config.mail_from
@@ -48,8 +40,7 @@ def send_mail(mail_context: MailContext, config: MailConfig):
     # session = smtplib.SMTP("smtp.gmail.com", 587)  # use gmail with port
     session = smtplib.SMTP(config.host, config.port)  # use gmail with port
     session.starttls()  # enable security
-    session.login(sender_address, sender_pass)  # login with mail_id and password
+    session.login(config.mail_from, config.password)  # login with mail_id and password
     text = message.as_string()
-    session.sendmail(sender_address, receiver_address, text)
+    session.sendmail(config.mail_from, mail_context.to, text)
     session.quit()
-    print("Mail Sent")

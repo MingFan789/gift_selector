@@ -1,3 +1,5 @@
+import yaml
+
 class Singleton(type):
     _instances = {}
 
@@ -10,3 +12,6 @@ class Singleton(type):
 class ConfigContext(metaclass=Singleton):
     def __init__(self) -> None:
         print("Init config first time")
+        # read from yaml
+        with open("./resource/config.yml", "r") as stream:
+            self.config:dict = yaml.safe_load(stream)
