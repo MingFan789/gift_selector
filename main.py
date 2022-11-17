@@ -22,13 +22,20 @@ def main():
     print(mail_config)
     for mail_pair in member_target_pair_list:
         # Base on result list to rander the result
-        mail = prepare_mail()
+        mail = prepare_mail(mail_pair, member_list)
         # send email
-        # send_mail(mail, config)
+        send_mail(mail, config)
 
 
-def prepare_mail() -> MailContext:
-    mail_context = MailContext(to="", content="", subject="")
+def prepare_mail(mail_pair, member_list) -> MailContext:
+    member = mail_pair[0]
+    target = mail_pair[1]
+    
+    # Rander mail body
+    subject = "2022 Christmas Exchange Gift - UAT"
+    content = f"Hello {member},Your target is {target}"
+    
+    mail_context = MailContext(member_list[member], content, subject)
     return mail_context
 
 
