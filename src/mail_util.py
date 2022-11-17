@@ -18,10 +18,6 @@ class MailConfig(BaseModel):
 
 
 def send_mail(mail_context: MailContext, config: MailConfig):
-    # mail_content = """Hello,
-    # This is a simple mail. There is only text, no attachments are there The mail is sent using Python SMTP library.
-    # Thank You
-    # """
     mail_content = mail_context.content
 
     # Setup the MIME
